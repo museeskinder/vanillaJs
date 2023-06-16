@@ -6,6 +6,12 @@ const total = document.querySelector('.total');
 
 let ticketPrice = selectedMovie.value;
 
+container.addEventListener('click', (e) => {
+    if(e.target.classList.contains('seat') && !e.target.classList.contains('occupied'))
+        e.target.classList.toggle('selected');
+    updateTotal();
+});
+
 //reflecting movie change on total section
 selectedMovie.addEventListener('change', (e) => {
     ticketPrice = e.target.value;
@@ -14,14 +20,18 @@ selectedMovie.addEventListener('change', (e) => {
 
 //modifying total section
 const updateTotal = () => {
-    count.innerText = (document.querySelectorAll('.row .seat.selected')).length;
-    total.innerText = (document.querySelectorAll('.row .seat.selected')).length * ticketPrice;
+    const selectedSeats = (document.querySelectorAll('.row .seat.selected'));
+    count.innerText = selectedSeats.length;
+    total.innerText = selectedSeats.length * ticketPrice;
+
+    const seatIndex = [...selectedSeats].map((e) => [...seats].indexOf(e));
+    saveForLater('selected_seats', seatIndex); 
+    saveForLater('selected_movie', selectedMovie.value); 
 };
 
-//selecting seats
-container.addEventListener('click', (e) => {
-    if(e.target.classList.contains('seat') && !e.target.classList.contains('occupied'))
-        e.target.classList.toggle('selected');
-    updateTotal();
-});
-
+//saving seats and total to local storage
+const saveForLater = (key, value) => {
+    if(typeof(value) !== String)
+        localStorage.setItem(key, JSON.stringify(value));
+    localStorage.setItem(key, value);
+};
