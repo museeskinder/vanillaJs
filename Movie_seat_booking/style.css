@@ -31,7 +31,7 @@ body {
     appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
-    padding: 5px 15px;
+    padding: 5px 13px;
     margin: 0 10px;
     font-size: 14px;
 }
@@ -40,14 +40,15 @@ body {
 .seat-info {
     background-color: rgba(0, 0, 0, 0.1);
     margin: 10px 0;
-    padding: 7px 20px;
+    padding: 7px 25px;
     display: flex;
+
     font-size: 14px;
 }
 
 .seat-info .each-seat {
     display: flex;
-    margin-right: 15px;
+    margin-right: 10px;
     align-items: center;
 }
 
@@ -56,8 +57,8 @@ body {
 }
 .seat {
     background-color: #444551;
-    height: 12px;
-    width: 15px;
+    height: 10px;
+    width: 13px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     margin: 3px;
@@ -96,5 +97,15 @@ body {
     display: flex;
     margin: 2px 0;
 }
+
+
+.text {
+    margin-top: 15px;
+}
+
+.text .count, .text .total {
+    color: var(--blue-seat);
+}
+
 
 
