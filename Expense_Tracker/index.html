@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Expense Trucker</h1>
+
+        <!-- Balance section -->
+        <div class="balance">
+            <p class="f1">Your balance</p>
+            <h2 id="balance">$200</h2>
+        </div>
+
+        <!--section to show balnce and income side by side-->
+        <div class="income-expense">
+            <div class="income">
+                <p class="f1">income</p>
+                <h3 class="income"></h3>
+            </div>
+            <div class="income">
+                <p class="f1">expense</p>
+                <h3 class="expense"></h3>
+            </div>
+        </div>
+
+        <!-- History section-->
+        <div class="history">
+            <div class="message">
+                <p>History</p>
+                <hr/>
+            </div>
+            <div class="item">
+                <p class="item-name">Camera</p>
+                <p class="value">-100</p>
+            </div>
+        </div>
+
+        <!-- Adding section-->
+        <div class="add">
+            <div class="mess">
+                <p>Add new transaction</p>
+                <hr/>
+            </div>
+            <div class="text">
+                <label>Text</label>
+                <input type="text" class="text" placeholder="Enter text...">
+            </div>
+            <div class="amount">
+                <label>Amount</label>
+                <label>(negative-expense, positive-income)</label>
+                <input type="number" class="amount" placeholder="Enter amount...">
+            </div>
+        </div>
+        <button>Add transaction</button>
+    </div>
+</body>
+</html>
