@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Expense Tracker</title>
 </head>
 <body>
@@ -20,10 +21,12 @@
             <div class="income">
                 <p class="f1">income</p>
                 <h3 class="income"></h3>
+                <span class="income-value"></span>
             </div>
-            <div class="income">
+            <div class="expense">
                 <p class="f1">expense</p>
                 <h3 class="expense"></h3>
+                <span class="expense-value">$200.00</span>
             </div>
         </div>
 
@@ -36,6 +39,7 @@
             <div class="item">
                 <p class="item-name">Camera</p>
                 <p class="value">-100</p>
+                <div class="color"></div>
             </div>
         </div>
 
@@ -57,5 +61,6 @@
         </div>
         <button>Add transaction</button>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
