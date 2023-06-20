@@ -8,24 +8,23 @@
 </head>
 <body>
     <div class="container">
-        <h1>Expense Trucker</h1>
+        <h1>Expense Tracker</h1>
 
         <!-- Balance section -->
         <div class="balance">
             <p class="f1">Your balance</p>
-            <h2 id="balance">$200</h2>
+            <h2 id="balance">$200.00</h2>
         </div>
 
         <!--section to show balnce and income side by side-->
-        <div class="income-expense">
+        <div class="income-expense fb">
             <div class="income">
                 <p class="f1">income</p>
-                <h3 class="income"></h3>
-                <span class="income-value"></span>
+                <span class="income-value">$100.00</span>
             </div>
+            <hr class="separator"/>
             <div class="expense">
                 <p class="f1">expense</p>
-                <h3 class="expense"></h3>
                 <span class="expense-value">$200.00</span>
             </div>
         </div>
@@ -36,16 +35,18 @@
                 <p>History</p>
                 <hr/>
             </div>
-            <div class="item">
-                <p class="item-name">Camera</p>
-                <p class="value">-100</p>
-                <div class="color"></div>
+            <div class="item fb">
+                <p class="item-name">camera</p>
+                <div class="color-div">
+                    <p class="value">-100</p>
+                    <div class="color red"></div>
+                </div>
             </div>
         </div>
 
         <!-- Adding section-->
         <div class="add">
-            <div class="mess">
+            <div class="message">
                 <p>Add new transaction</p>
                 <hr/>
             </div>
@@ -56,7 +57,7 @@
             <div class="amount">
                 <label>Amount</label>
                 <label>(negative-expense, positive-income)</label>
-                <input type="number" class="amount" placeholder="Enter amount...">
+                <input type="text" class="amount" placeholder="Enter amount...">
             </div>
         </div>
         <button>Add transaction</button>
