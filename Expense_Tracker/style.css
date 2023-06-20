@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    user-select: none;
 }
 
 :root {
@@ -99,7 +100,7 @@ hr {
     justify-content: space-between;
     background-color: var(--color-backgrond);
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+    border-radius: 3px;
 }
 
 .add {
@@ -139,4 +140,12 @@ button {
 
 .color.red {
     background-color: var(--color-red);
+}
+
+#error {
+    color: var(--color-red);
+    font-size: 13px;
+    position: relative;
+    top: -5px;
+    left: 0;
 }
