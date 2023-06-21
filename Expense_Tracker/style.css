@@ -7,10 +7,10 @@
 
 :root {
     --color-backgrond: #fff;
-    --color-green: #6ad790;
-    --color-red: #8f393b;
-    --color-violet: #9375f5;
-    --color-black: #121212;
+    --color-green: #31ca67;
+    --color-red: #a7282a;
+    --color-violet: #5933d6;
+    --color-black: #0e0d0d;
 }
 
 body {
@@ -85,6 +85,16 @@ hr {
 .item {
     margin-top: 10px;
     font-size: 14px;
+}
+
+.item:hover::before {
+    content: 'Delete';
+    background-color: #a7282a;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    cursor: pointer;
+    font-weight: 600;
 }
 
 .value, .item-name {
