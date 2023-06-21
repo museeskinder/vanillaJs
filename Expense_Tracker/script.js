@@ -11,6 +11,8 @@ let storeIncome = 0, storeExpense = 0, storeBalance = 0;
 
 btn.addEventListener('click', () => {
     updateAll(Number(amount.value));
+    text.value = '';
+    amount.value = '';
 })
 
 const updateAll = (num) => {
@@ -20,7 +22,7 @@ const updateAll = (num) => {
             storeExpense += num;
         else
             storeIncome += num;
-        storeBalance += storeIncome + storeExpense;
+        storeBalance = storeIncome + storeExpense;
         income.innerText = `$${storeIncome}`;
         expense.innerText = `$${storeExpense}`;
         balance.innerText = `$${storeBalance}`;
