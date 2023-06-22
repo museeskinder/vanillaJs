@@ -8,7 +8,6 @@ const btn = document.getElementById('btn');
 const error = document.getElementById('error');
 
 let storeIncome = 0, storeExpense = 0, storeBalance = 0;
-let itemsClass = [];
 
 //writing new values on DOM
 const writeValues = (incomeValue, expenseValue) => {
@@ -56,7 +55,6 @@ const removeHistory = (child) => {
 
 //element appended in history
 const historyChild = (text, num, color) => {
-
     // creating elements
     const item = document.createElement('div');
     const itemName = document.createElement('p');
@@ -65,8 +63,7 @@ const historyChild = (text, num, color) => {
     const colorValue = document.createElement('div');
 
     // adding class name
-    itemsClass.push(itemsClass.length + 1);
-    item.className = `item fb ${itemsClass.length}`;
+    item.className = 'item fb';
     itemName.className = 'item-name';
     colorDiv.className = 'color-div';
     value.className = 'value';
