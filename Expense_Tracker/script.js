@@ -73,7 +73,6 @@ const updateHistory =  (text, num) => {
 }
 
 const removeHistory = (child) => {
-    
     const childText = (child.querySelector('.item-name')).innerText;
     const childValue = Number((child.querySelector('.color-div .value')).innerText);
     if(childValue > 0)
@@ -119,11 +118,13 @@ const historyChild = (text, num, color) => {
 //event listeners
 populateAll();
 btn.addEventListener('click', () => {
-    updateAll(Number(amount.value));
-    updateHistory(text.value, Number(amount.value));
-    toLocal(Number(amount.value), text.value);
-    text.value = '';
-    amount.value = '';
+    if(amount.value !== '' && text.value !== '') {
+        updateAll(Number(amount.value));
+        updateHistory(text.value, Number(amount.value));
+        toLocal(Number(amount.value), text.value);
+        text.value = '';
+        amount.value = '';
+    }
 })
 
 history.addEventListener('click', (e) => {
