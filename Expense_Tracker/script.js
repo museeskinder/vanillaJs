@@ -91,19 +91,14 @@ const historyChild = (text, num, color) => {
 btn.addEventListener('click', () => {
     updateAll(Number(amount.value));
     updateHistory(text.value, Number(amount.value));
-    const item = document.querySelectorAll('.container .history .item.fb');
-    // item.addEventListener('click', (e) => {
-    //     // removeHistory(e.target);
-    //     console.log(e.target);
-    // })
-    [...item].forEach((e) => {
-        e.addEventListener('click', (e) => {
-            console.log(e);
-        })
-    })
     text.value = '';
     amount.value = '';
 })
+
+history.addEventListener('click', (e) => {
+    if(e.target.className.includes('item fb'))
+        removeHistory(e.target);
+}) 
 
 
 
