@@ -1,6 +1,5 @@
-const test = document.getElementById('test');
+let items = []
+items.push(items.length + 1);
+items.push(items.length + 1);
 
-test.appendChild(`<p>Hello</P>`);
-
-const message = document.createElement("div");
-message.
+console.log(items);

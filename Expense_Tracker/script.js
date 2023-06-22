@@ -8,14 +8,17 @@ const btn = document.getElementById('btn');
 const error = document.getElementById('error');
 
 let storeIncome = 0, storeExpense = 0, storeBalance = 0;
+let itemsClass = [];
 
-btn.addEventListener('click', () => {
-    updateAll(Number(amount.value));
-    updateHistory(text.value, Number(amount.value));
-    text.value = '';
-    amount.value = '';
-})
+//writing new values on DOM
+const writeValues = (incomeValue, expenseValue) => {
+        storeBalance = incomeValue + expenseValue;
+        income.innerText = `$${incomeValue}`;
+        expense.innerText = `$${expenseValue}`;
+        balance.innerText = `$${storeBalance}`;
+}
 
+//update functions
 const updateAll = (num) => {
     if (!Number.isNaN(num)) {
         error.innerText = '';
@@ -23,24 +26,35 @@ const updateAll = (num) => {
             storeExpense += num;
         else
             storeIncome += num;
-        storeBalance = storeIncome + storeExpense;
-        income.innerText = `$${storeIncome}`;
-        expense.innerText = `$${storeExpense}`;
-        balance.innerText = `$${storeBalance}`;
+        writeValues(storeIncome, storeExpense);
     }
     else
         error.innerText = '*please enter number';
 }
 
-const updateHistory = (text, num) => {
+const updateHistory =  (text, num) => {
     let isGreen;
     if (num > 0)
         isGreen = 'green';
     else
         isGreen = 'red';
-    history.appendChild(historyChild(text, num, isGreen));
+    if(!Number.isNaN(num))
+       history.appendChild(historyChild(text, num, isGreen));
 }
 
+const removeHistory = (child) => {
+    
+    const childText = (child.querySelector('.item-name')).innerText;
+    const childValue = Number((child.querySelector('.color-div .value')).innerText);
+    if(childValue > 0)
+        storeIncome -= childValue;
+    else    
+        storeExpense -= childValue;
+    history.removeChild(child);
+    writeValues(storeIncome, storeExpense);
+};
+
+//element appended in history
 const historyChild = (text, num, color) => {
 
     // creating elements
@@ -51,7 +65,8 @@ const historyChild = (text, num, color) => {
     const colorValue = document.createElement('div');
 
     // adding class name
-    item.className = 'item fb';
+    itemsClass.push(itemsClass.length + 1);
+    item.className = `item fb ${itemsClass.length}`;
     itemName.className = 'item-name';
     colorDiv.className = 'color-div';
     value.className = 'value';
@@ -72,5 +87,23 @@ const historyChild = (text, num, color) => {
     return item;
 }
 
-console.log(text.value)
-console.log(Number(amount.value));
+//event listeners
+btn.addEventListener('click', () => {
+    updateAll(Number(amount.value));
+    updateHistory(text.value, Number(amount.value));
+    const item = document.querySelectorAll('.container .history .item.fb');
+    // item.addEventListener('click', (e) => {
+    //     // removeHistory(e.target);
+    //     console.log(e.target);
+    // })
+    [...item].forEach((e) => {
+        e.addEventListener('click', (e) => {
+            console.log(e);
+        })
+    })
+    text.value = '';
+    amount.value = '';
+})
+
+
+
