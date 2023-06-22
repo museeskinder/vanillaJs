@@ -8,6 +8,37 @@ const btn = document.getElementById('btn');
 const error = document.getElementById('error');
 
 let storeIncome = 0, storeExpense = 0, storeBalance = 0;
+let storeForLocal = [];
+
+//storing to local storage
+const toLocal = (num, text) => {
+    let itemObj = {};
+    itemObj.text = text;
+    itemObj.value = num;
+    storeForLocal.push(itemObj);
+    localStorage.setItem('data', JSON.stringify(storeForLocal));
+}
+
+const removeFromLocal = (text, num) => {
+    let removedIndex;
+    [...storeForLocal].forEach((e) => {
+        if(e.text === text && e.value === num)
+            removedIndex = storeForLocal.indexOf(e);
+    })
+    storeForLocal.splice(removedIndex, 1);
+    localStorage.setItem('data', JSON.stringify(storeForLocal));
+}
+
+const populateAll = () => {
+    let temp = JSON.parse(localStorage.getItem('data'));
+    if(temp !== null) {
+        storeForLocal = temp;
+        storeForLocal.forEach((e) => {
+            updateAll(e.value);
+            updateHistory(e.text, e.value);
+        })
+    }
+}
 
 //writing new values on DOM
 const writeValues = (incomeValue, expenseValue) => {
@@ -38,7 +69,7 @@ const updateHistory =  (text, num) => {
     else
         isGreen = 'red';
     if(!Number.isNaN(num))
-       history.appendChild(historyChild(text, num, isGreen));
+        history.appendChild(historyChild(text, num, isGreen));
 }
 
 const removeHistory = (child) => {
@@ -51,6 +82,7 @@ const removeHistory = (child) => {
         storeExpense -= childValue;
     history.removeChild(child);
     writeValues(storeIncome, storeExpense);
+    removeFromLocal(childText, childValue);
 };
 
 //element appended in history
@@ -85,9 +117,11 @@ const historyChild = (text, num, color) => {
 }
 
 //event listeners
+populateAll();
 btn.addEventListener('click', () => {
     updateAll(Number(amount.value));
     updateHistory(text.value, Number(amount.value));
+    toLocal(Number(amount.value), text.value);
     text.value = '';
     amount.value = '';
 })
@@ -96,6 +130,3 @@ history.addEventListener('click', (e) => {
     if(e.target.className.includes('item fb'))
         removeHistory(e.target);
 }) 
-
-
-
