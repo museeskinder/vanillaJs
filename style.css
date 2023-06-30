@@ -1,0 +1,140 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #34495e;
+    color: #fff;
+    font-family: fantasy;
+}
+
+h1 {
+    margin: 10px;
+}
+
+h1, p {
+    text-align: center;
+}
+
+.svg-fig {
+    fill: transparent;
+    stroke: #fff;
+    stroke-width: 4px;
+    stroke-linecap: round;
+}
+
+.fig {
+    grid-area: fig;
+}
+
+.fig-x, .fig-y, .fig-a, .fig-b, .fig-c, .fig-d {
+    stroke: #34495e;
+}
+
+.fig-x.show, .fig-y.show, .fig-a.show, .fig-b.show, .fig-c.show, .fig-d.show {
+    stroke: #fff;
+}
+
+.fig-x {
+    display: block;
+}
+.main {
+    margin: 100px 0;
+    display: grid;
+    grid-template-areas: 
+    "fig fig error"
+    "fig fig error"
+    "correct correct correct";
+    align-items: center;
+    justify-items: center;
+    grid-gap: 10px 100px;
+}
+
+.error p {
+    grid-area: error;
+    margin: 10px 0;
+}
+
+.correct {
+    grid-area: correct;
+    display: flex;
+    justify-content: center;
+}
+
+.word   {
+    margin: 0 10px;
+}
+
+.word p {
+    font-size: 25px;
+    margin: 5px 0;
+}
+
+.word .line {
+    height: 3px;
+    width: 20px;
+    background-color: rgba(13, 182, 95, 0.609);
+
+}
+
+.message-won {
+    background-color: rgba(40, 151, 216, 0.1);
+    height: 180px;
+    width: 400px;
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
+}
+
+.message-won p {
+    font-size: 25px;
+    margin: 20px 0;
+}
+
+.message-won button {
+    background-color: #fff;
+    color: #34495e;
+    border: none;
+    font-size: 20px;
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.message-won.show {
+    display: block;
+}
+
+.container.hide{
+    display: none;
+}
+
+.message-word {
+    display: none;
+    font-size: 30px;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.message-word.show {
+    display: block;
+}

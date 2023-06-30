@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Hangman</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="intro">
+            <h1>Hangman</h1>
+            <p>Find the hidden word - Enter a letter</p>
+        </div>
+        <div class="main">
+
+            <!-- Hangman graphic figure-->
+            <div class="fig">
+                <svg class="svg-fig" height="250" width="200">
+                    <line x1="40" x2="130" y1="0" y2="0" />
+                    <line x1="40" x2="40" y1="0" y2="190" />
+                    <line x1="20" x2="60" y1="190" y2="190" />
+                    <line x1="130" x2="130" y1="0" y2="20"/>
+                    <circle cx="130" cy="40" r="18" class="fig-x"/>
+                    <line x1="130"  x2="130" y1="60" y2="120" class="fig-y"/>
+                    <line x1="126" x2="110" y1="70" y2="90" class="fig-a"/>
+                    <line x1="133" x2="150" y1="70" y2="90" class="fig-b"/>
+                    <line x1="130" x2="110" y1="120" y2="140" class="fig-c"/>
+                    <line x1="130" x2="150" y1="120" y2="140" class="fig-d"/>
+                </svg>
+            </div>
+
+            <!-- section for WRONG wods displayed-->
+            <div class="error">
+                <p>Error Words</p>
+                <p id="error-words"></p>
+            </div>
+
+            <!-- section where correct words displayed-->
+            <div class="correct"></div>
+        </div>
+    </div>
+    <div class="message-won">
+        <p>😎 Congratulations you won!</p>
+        <button>continue</button>
+    </div>
+    <div class="message-word">
+        <p>"hello"</p>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
