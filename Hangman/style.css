@@ -33,11 +33,11 @@ h1, p {
     grid-area: fig;
 }
 
-.fig-x, .fig-y, .fig-a, .fig-b, .fig-c, .fig-d {
+.figs {
     stroke: #34495e;
 }
 
-.fig-x.show, .fig-y.show, .fig-a.show, .fig-b.show, .fig-c.show, .fig-d.show {
+.figs.show {
     stroke: #fff;
 }
 
