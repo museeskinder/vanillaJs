@@ -1,11 +1,8 @@
-//hangman bodyparts
-const head = document.querySelector('.container .main .fig .fig-x');
-const neck = document.querySelector('.container .main .fig .fig-y');
-const leftHand = document.querySelector('.container .main .fig .fig-a');
-const rightHand = document.querySelector('.container .main .fig .fig-b');
-const leftLeg = document.querySelector('.container .main .fig .fig-c');
-const rightLeg = document.querySelector('.container .main .fig fig-d');
+//hangman body parts
+const hangParts = document.getElementById('figs-parent');
+const parts = hangParts.querySelectorAll('.figs');
 
+//other needed dom elements
 const correct = document.querySelector('.container .main .correct')
 const errorWords = document.getElementById('error-words');
 const won = document.querySelector('.message-won');
@@ -68,5 +65,6 @@ document.addEventListener('keypress', e => {
     }
     else {
         setErrorWord(e.key);
+        [...parts].find((e) => !e.classList.contains('show')).classList = 'figs show';
     }
-})
+});
