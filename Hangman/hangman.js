@@ -5,6 +5,7 @@ const parts = hangParts.querySelectorAll('.figs');
 //other needed dom elements
 const correct = document.querySelector('.container .main .correct')
 const errorWords = document.getElementById('error-words');
+const container = document.querySelector('.container');
 const won = document.querySelector('.message-won');
 const lost = document.querySelector('.message-word');
 const populatedWords = correct.childNodes;
@@ -47,12 +48,32 @@ const setErrorWord = (letter) => {
     }
 }
 
+const checkStatus = () => {
+    let numberOfVisibleWords = [...populatedWords].filter((e) => e.firstChild.innerText !== '').length;
+    let numberOfErrorWords = [...parts].filter((e) => e.classList.contains('show')).length;
+    if(numberOfErrorWords === 6)
+        youLost();
+    if(numberOfVisibleWords === word.length)
+        youWon();
+}
+
+
 let word = getWord(prev);
 console.log(word);
 
 [...word].forEach((e) => {
     correct.appendChild(prepareWord(e));
 })
+
+const youWon = () => {
+    container.className = 'container hide';
+    won.className = 'message-won show';
+}
+
+const youLost = () => {
+    lost.querySelector('p').innerText = word;
+    lost.className = 'message-word show';
+}
 
 document.addEventListener('keypress', e => {
     let collection = [...populatedWords].filter((f) => 
@@ -67,4 +88,5 @@ document.addEventListener('keypress', e => {
         setErrorWord(e.key);
         [...parts].find((e) => !e.classList.contains('show')).classList = 'figs show';
     }
+    checkStatus();
 });
