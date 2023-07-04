@@ -41,9 +41,6 @@ h1, p {
     stroke: #fff;
 }
 
-.fig-x {
-    display: block;
-}
 .main {
     margin: 100px 0;
     display: grid;
@@ -116,7 +113,7 @@ h1, p {
 }
 
 .message-won.show {
-    display: block;
+    display: flex;
 }
 
 .container.hide{

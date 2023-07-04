@@ -12,8 +12,8 @@ const populatedWords = correct.childNodes;
 const continueBtn = document.querySelector('button');
 
 let words = ["message", "television", "anthropology",
-             "hacker", "javascript", "m", "world", "marcon", "code", "html"];
-let prev = 3;
+             "hacker", "javascript", "muse", "world", "marcon", "code", "html"];
+let prev = 0;
 
 const getWord = (prev) => { 
     let randNum = Number(String(Math.random() * 10).slice(0, 1));
@@ -58,9 +58,7 @@ const checkStatus = () => {
         youWon();
 }
 
-
 let word = getWord(prev);
-console.log(word);
 
 [...word].forEach((e) => {
     correct.appendChild(prepareWord(e));
@@ -78,7 +76,7 @@ const youLost = () => {
     /* if there is a key press after the word is displayed, it
     hides  the word for anouther trial  */
     document.addEventListener('keypress', e => {
-        if(e.key)
+        if(e.key) 
             lost.className = 'message-word';
     });
 }
@@ -102,5 +100,6 @@ document.addEventListener('keypress', e => {
         setErrorWord(e.key);
         [...parts].find((e) => !e.classList.contains('show')).classList = 'figs show';
     }
+    //check won/lose status on every key press
     checkStatus();
 }); 
