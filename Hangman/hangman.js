@@ -9,9 +9,10 @@ const container = document.querySelector('.container');
 const won = document.querySelector('.message-won');
 const lost = document.querySelector('.message-word');
 const populatedWords = correct.childNodes;
+const continueBtn = document.querySelector('button');
 
-let words = ["message", "programming", "anthropology",
-             "hacker", "javascript", "java", "world", "google", "code", "html"];
+let words = ["message", "television", "anthropology",
+             "hacker", "javascript", "m", "world", "marcon", "code", "html"];
 let prev = 3;
 
 const getWord = (prev) => { 
@@ -73,8 +74,21 @@ const youWon = () => {
 const youLost = () => {
     lost.querySelector('p').innerText = word;
     lost.className = 'message-word show';
+
+    /* if there is a key press after the word is displayed, it
+    hides  the word for anouther trial  */
+    document.addEventListener('keypress', e => {
+        if(e.key)
+            lost.className = 'message-word';
+    });
 }
 
+//reloads the page when continue button is clicked
+continueBtn.addEventListener('click', e => {
+    location.reload();
+})
+
+//main event listener for keyobord key press
 document.addEventListener('keypress', e => {
     let collection = [...populatedWords].filter((f) => 
         f.firstChild.id === e.key && !f.firstChild.className.includes('set')
@@ -89,4 +103,4 @@ document.addEventListener('keypress', e => {
         [...parts].find((e) => !e.classList.contains('show')).classList = 'figs show';
     }
     checkStatus();
-});
+}); 
