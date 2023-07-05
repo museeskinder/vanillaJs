@@ -12,14 +12,14 @@ rulesBtn.addEventListener('click', e => rules.classList.add('show'));
 closeBtn.addEventListener('click', e => rules.classList.remove('show'));
 
 //paddle key press event handlers
-document.addEventListener('keydown',  (e) => {
-    if(e.key === 'ArrowRight' || e.key === 'Right')
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'Right')
         paddle.dx = paddle.speed;
-    if(e.key === 'ArrowLeft' || e.key === 'Left')
+    if (e.key === 'ArrowLeft' || e.key === 'Left')
         paddle.dx = -paddle.speed;
 });
 document.addEventListener('keyup', (e) => {
-    if(e.key === 'ArrowRight' || e.key === 'ArrowLeft' || e.key === 'Left' || e.key === 'Right')
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft' || e.key === 'Left' || e.key === 'Right')
         paddle.dx = 0;
 });
 
@@ -29,38 +29,38 @@ let brickColumns = 9;
 
 //props
 const ball = {
-    x : canvas.width / 2,
-    y : canvas.height / 2,
-    speed : 4,
-    size : 10,
-    dx : 4,
-    dy : -4
+    x: canvas.width / 2,
+    y: canvas.height / 2,
+    speed: 3,
+    size: 10,
+    dx: 5,
+    dy: -5
 }
 const paddle = {
-    x : canvas.width / 2 - 40,
-    y : canvas.height -20,
-    width : 90,
+    x: canvas.width / 2 - 40,
+    y: canvas.height - 20,
+    width: 90,
     height: 10,
-    speed : 8,
-    dx : 0
+    speed: 8,
+    dx: 0
 }
 
 const brick = {
-    width : 70,
-    height : 20,
-    padding : 10,
-    offsetX : 45,
-    offsetY : 60,
-    visible : true
+    width: 70,
+    height: 20,
+    padding: 10,
+    offsetX: 45,
+    offsetY: 60,
+    visible: true
 }
 
 let allBricks = [];
-for(let i = 0; i < brickRow; i++) {
+for (let i = 0; i < brickRow; i++) {
     allBricks[i] = [];
-    for(let j = 0; j < brickColumns; j++) {
-        let x  = j * (brick.width + brick.padding) + brick.offsetX;
+    for (let j = 0; j < brickColumns; j++) {
+        let x = j * (brick.width + brick.padding) + brick.offsetX;
         let y = i * (brick.height + brick.padding) + brick.offsetY;
-        allBricks[i][j] = {x, y, ...brick};
+        allBricks[i][j] = { x, y, ...brick };
     }
 }
 
@@ -79,7 +79,7 @@ const drawPaddle = () => {
     ctx.fill();
     ctx.closePath();
 }
-const drawScore = () => { 
+const drawScore = () => {
     ctx.fillStyle = '#0095dd';
     ctx.font = '20px Arial';
     ctx.fillText(`Score: ${score}`, canvas.width - 100, 30);
@@ -99,21 +99,27 @@ const movePaddle = () => {
     paddle.x += paddle.dx;
 
     //collussion detection - preventing the paddle getting out from the canvas while moving
-    if(paddle.x + paddle.width > canvas.width)
+    if (paddle.x + paddle.width > canvas.width)
         paddle.x = canvas.width - paddle.width;
-    if(paddle.x < 0)
+    if (paddle.x < 0)
         paddle.x = 0;
 }
 const moveBall = () => {
     ball.x += ball.dx;
     ball.y += ball.dy;
 
-    //collussion detection - when the ball reaches ends of canvas movement directition is inverted
-    if(ball.y + ball.size > canvas.height || ball.y - ball.size < 0)
+    //collussion detection - when the ball reaches ends of canvas movement directition is reversed
+    if (ball.y + ball.size > canvas.height || ball.y - ball.size < 0)
         ball.dy *= -1;
-    if(ball.x + ball.size > canvas.width || ball.x  < 0)
+    if (ball.x + ball.size > canvas.width || ball.x < 0)
         ball.dx *= -1;
-}
+
+    //collussion detection - when the ball hits the paddle its movement direction is reversed
+    if (ball.y + ball.size > paddle.y &&
+        ball.x - ball.size >  paddle.x &&
+        ball.x + ball.size < paddle.x + paddle.width)
+        ball.dy = -ball.speed;
+} 
 const update = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     moveBall();
