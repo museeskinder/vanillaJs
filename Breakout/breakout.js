@@ -21,7 +21,7 @@ const ball = {
     y : canvas.height / 2,
     size : 10,
     dx : 4,
-    dy : -4
+    dy : 0
 }
 const paddle = {
     x : canvas.width / 2 - 40,
@@ -44,7 +44,9 @@ let allBricks = [];
 for(let i = 0; i < brickRow; i++) {
     allBricks[i] = [];
     for(let j = 0; j < brickColumns; j++) {
-        allBricks[i][j] = {j, i, ...brick};
+        let x  = j * (brick.width + brick.padding) + brick.offsetX;
+        let y = i * (brick.height + brick.padding) + brick.offsetY;
+        allBricks[i][j] = {x, y, ...brick};
     }
 }
 
@@ -64,10 +66,22 @@ const drawPaddle = () => {
     ctx.closePath();
 }
 const drawScore = () => { 
-    ctx.fillStyle = 'black';
+    ctx.fillStyle = '#0095dd';
     ctx.font = '20px Arial';
     ctx.fillText(`Score: ${score}`, canvas.width - 100, 30);
+}
+const drawBricks = () => {
+    allBricks.forEach(e => {
+        e.forEach(f => {
+            ctx.beginPath();
+            ctx.fillRect(f.x, f.y, f.width, f.height);
+            ctx.fillStyle = f.visible ? '#0095dd' : '#fff';
+            ctx.fill();
+            ctx.closePath();
+        })
+    })
 }
 drawBall();
 drawPaddle();
 drawScore();
+drawBricks();
