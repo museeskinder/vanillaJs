@@ -11,6 +11,18 @@ const ctx = canvas.getContext('2d')
 rulesBtn.addEventListener('click', e => rules.classList.add('show'));
 closeBtn.addEventListener('click', e => rules.classList.remove('show'));
 
+//paddle key press event handlers
+document.addEventListener('keydown',  (e) => {
+    if(e.key === 'ArrowRight' || e.key === 'Right')
+        paddle.dx = paddle.speed;
+    if(e.key === 'ArrowLeft' || e.key === 'Left')
+        paddle.dx = -paddle.speed;
+});
+document.addEventListener('keyup', (e) => {
+    if(e.key === 'ArrowRight' || e.key === 'ArrowLeft' || e.key === 'Left' || e.key === 'Right')
+        paddle.dx = 0;
+});
+
 let score = 0;
 let brickRow = 5;
 let brickColumns = 9;
@@ -19,15 +31,17 @@ let brickColumns = 9;
 const ball = {
     x : canvas.width / 2,
     y : canvas.height / 2,
+    speed : 4,
     size : 10,
     dx : 4,
-    dy : 0
+    dy : -4
 }
 const paddle = {
     x : canvas.width / 2 - 40,
     y : canvas.height -20,
     width : 90,
     height: 10,
+    speed : 8,
     dx : 0
 }
 
@@ -81,7 +95,23 @@ const drawBricks = () => {
         })
     })
 }
-drawBall();
-drawPaddle();
-drawScore();
-drawBricks();
+const movePaddle = () => {
+    paddle.x += paddle.dx;
+
+    //preventing the paddle getting out from the canvas while moving
+    if(paddle.x + paddle.width > canvas.width)
+        paddle.x = canvas.width - paddle.width;
+    if(paddle.x + paddle.width < 0)
+        paddle.x = 0;
+}
+const update = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    movePaddle();
+    drawBall();
+    drawPaddle();
+    drawScore();
+    drawBricks();
+    requestAnimationFrame(update);
+}
+
+update();
