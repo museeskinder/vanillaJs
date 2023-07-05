@@ -101,7 +101,7 @@ const movePaddle = () => {
     //preventing the paddle getting out from the canvas while moving
     if(paddle.x + paddle.width > canvas.width)
         paddle.x = canvas.width - paddle.width;
-    if(paddle.x + paddle.width < 0)
+    if(paddle.x < 0)
         paddle.x = 0;
 }
 const update = () => {
