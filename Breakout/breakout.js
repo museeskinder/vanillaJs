@@ -98,14 +98,25 @@ const drawBricks = () => {
 const movePaddle = () => {
     paddle.x += paddle.dx;
 
-    //preventing the paddle getting out from the canvas while moving
+    //collussion detection - preventing the paddle getting out from the canvas while moving
     if(paddle.x + paddle.width > canvas.width)
         paddle.x = canvas.width - paddle.width;
     if(paddle.x < 0)
         paddle.x = 0;
 }
+const moveBall = () => {
+    ball.x += ball.dx;
+    ball.y += ball.dy;
+
+    //collussion detection - when the ball reaches ends of canvas movement directition is inverted
+    if(ball.y + ball.size > canvas.height || ball.y - ball.size < 0)
+        ball.dy *= -1;
+    if(ball.x + ball.size > canvas.width || ball.x  < 0)
+        ball.dx *= -1;
+}
 const update = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    moveBall();
     movePaddle();
     drawBall();
     drawPaddle();
