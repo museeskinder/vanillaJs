@@ -12,6 +12,8 @@ rulesBtn.addEventListener('click', e => rules.classList.add('show'));
 closeBtn.addEventListener('click', e => rules.classList.remove('show'));
 
 let score = 0;
+let brickRow = 5;
+let brickColumns = 9;
 
 //props
 const ball = {
@@ -27,6 +29,23 @@ const paddle = {
     width : 90,
     height: 10,
     dx : 0
+}
+
+const brick = {
+    width : 70,
+    height : 20,
+    padding : 10,
+    offsetX : 45,
+    offsetY : 60,
+    visible : true
+}
+
+let allBricks = [];
+for(let i = 0; i < brickRow; i++) {
+    allBricks[i] = [];
+    for(let j = 0; j < brickColumns; j++) {
+        allBricks[i][j] = {j, i, ...brick};
+    }
 }
 
 //drawing functions
