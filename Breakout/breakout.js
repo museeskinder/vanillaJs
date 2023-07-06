@@ -24,8 +24,8 @@ document.addEventListener('keyup', (e) => {
 });
 
 let score = 0;
-let brickRow = 5;
-let brickColumns = 9;
+let brickRow = 9;
+let brickColumns = 5;
 
 //props
 const ball = {
@@ -58,8 +58,8 @@ let allBricks = [];
 for (let i = 0; i < brickRow; i++) {
     allBricks[i] = [];
     for (let j = 0; j < brickColumns; j++) {
-        let x = j * (brick.width + brick.padding) + brick.offsetX;
-        let y = i * (brick.height + brick.padding) + brick.offsetY;
+        let x = i * (brick.width + brick.padding) + brick.offsetX;
+        let y = j * (brick.height + brick.padding) + brick.offsetY;
         allBricks[i][j] = { x, y, ...brick };
     }
 }
@@ -116,10 +116,10 @@ const moveBall = () => {
 
     //collussion detection - when the ball hits the paddle its movement direction is reversed
     if (ball.y + ball.size > paddle.y &&
-        ball.x - ball.size >  paddle.x &&
+        ball.x - ball.size > paddle.x &&
         ball.x + ball.size < paddle.x + paddle.width)
-        ball.dy = -ball.speed;
-} 
+            ball.dy = ball.speed;
+}
 const update = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     moveBall();
@@ -132,3 +132,4 @@ const update = () => {
 }
 
 update();
+console.log(allBricks);
