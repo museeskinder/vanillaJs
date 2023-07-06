@@ -118,7 +118,23 @@ const moveBall = () => {
     if (ball.y + ball.size > paddle.y &&
         ball.x - ball.size > paddle.x &&
         ball.x + ball.size < paddle.x + paddle.width)
-            ball.dy = ball.speed;
+            ball.dy = -ball.speed;
+
+    // collussion detection - bricks with ball
+    allBricks.forEach(brickRow => {
+        brickRow.forEach(eachBrick => {
+            if(eachBrick.visible) {
+                if(ball.x - ball.size > eachBrick.x &&
+                    ball.x + ball.size < eachBrick.x + eachBrick.width &&
+                    ball.y + ball.size > eachBrick.y &&
+                    ball.y - ball.size < eachBrick.y + eachBrick.height
+                ) {
+                    ball.dy *= -1;
+                    eachBrick.visible = false;
+                }
+            }
+        })
+    })
 }
 const update = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
