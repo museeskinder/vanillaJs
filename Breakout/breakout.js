@@ -109,10 +109,14 @@ const moveBall = () => {
     ball.y += ball.dy;
 
     //collussion detection - when the ball reaches ends of canvas movement directition is reversed
-    if (ball.y + ball.size > canvas.height || ball.y - ball.size < 0)
+    if ( ball.y - ball.size < 0)
         ball.dy *= -1;
     if (ball.x + ball.size > canvas.width || ball.x < 0)
         ball.dx *= -1;
+        
+    //reloads the page if we failed to catch the ball with paddle
+    if(ball.y + ball.size > canvas.height)
+        location.reload();
 
     //collussion detection - when the ball hits the paddle its movement direction is reversed
     if (ball.y + ball.size > paddle.y &&
@@ -130,20 +134,22 @@ const moveBall = () => {
                 ) {
                     ball.dy *= -1;
                     eachBrick.visible = false;
+                    score ++;   
                 }
         })
     })
+}
+const drawFuncs = () => {
+    drawBall();
+    drawPaddle();
+    drawScore();
+    drawBricks();
 }
 const update = () => {
     movePaddle();
     moveBall();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawBall();
-    drawPaddle();
-    drawScore();
-    drawBricks();
+    drawFuncs();
     requestAnimationFrame(update);
 }
-
 update();
-console.log(allBricks);
