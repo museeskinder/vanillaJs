@@ -31,10 +31,10 @@ let brickColumns = 5;
 const ball = {
     x: canvas.width / 2,
     y: canvas.height / 2,
-    speed: 3,
+    speed: 4,
     size: 10,
-    dx: 5,
-    dy: -5
+    dx: 4,
+    dy: -4
 }
 const paddle = {
     x: canvas.width / 2 - 40,
@@ -46,8 +46,8 @@ const paddle = {
 }
 
 const brick = {
-    width: 70,
-    height: 20,
+    w: 70,
+    h: 20,
     padding: 10,
     offsetX: 45,
     offsetY: 60,
@@ -58,8 +58,8 @@ let allBricks = [];
 for (let i = 0; i < brickRow; i++) {
     allBricks[i] = [];
     for (let j = 0; j < brickColumns; j++) {
-        let x = i * (brick.width + brick.padding) + brick.offsetX;
-        let y = j * (brick.height + brick.padding) + brick.offsetY;
+        let x = i * (brick.w + brick.padding) + brick.offsetX;
+        let y = j * (brick.h + brick.padding) + brick.offsetY;
         allBricks[i][j] = { x, y, ...brick };
     }
 }
@@ -88,7 +88,7 @@ const drawBricks = () => {
     allBricks.forEach(e => {
         e.forEach(f => {
             ctx.beginPath();
-            ctx.fillRect(f.x, f.y, f.width, f.height);
+            ctx.rect(f.x, f.y, f.w, f.h);
             ctx.fillStyle = f.visible ? '#0095dd' : '#fff';
             ctx.fill();
             ctx.closePath();
@@ -123,23 +123,21 @@ const moveBall = () => {
     // collussion detection - bricks with ball
     allBricks.forEach(brickRow => {
         brickRow.forEach(eachBrick => {
-            if(eachBrick.visible) {
-                if(ball.x - ball.size > eachBrick.x &&
-                    ball.x + ball.size < eachBrick.x + eachBrick.width &&
+                if(eachBrick.visible && ball.x - ball.size > eachBrick.x &&
+                    ball.x + ball.size < eachBrick.x + eachBrick.w &&
                     ball.y + ball.size > eachBrick.y &&
-                    ball.y - ball.size < eachBrick.y + eachBrick.height
+                    ball.y - ball.size < eachBrick.y + eachBrick.h
                 ) {
                     ball.dy *= -1;
                     eachBrick.visible = false;
                 }
-            }
         })
     })
 }
 const update = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    moveBall();
     movePaddle();
+    moveBall();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBall();
     drawPaddle();
     drawScore();
